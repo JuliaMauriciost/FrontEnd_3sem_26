@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Contatos</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/script.js"></script>
+</head>
+
+<body>
+    <header class="from-header">
+        <div class="container container--flex">
+
+            <img src="./images/Vector.svg" alt="imagem de um usuario ilustrado" class="form-header__image-perfil" />
+            <h1 class="titulo-color">
+                Contact Form
+            </h1>
+            <p class="titulo-fonte">Insira os dados de contato e clique em cadastrar!</p>
+
+    </header>
+
+    <main>
+        <div class="container">
+            <form class="frm-contact" action="">
+
+                <div class="frm-contact__linha">
+
+                    <div class="frm-contact__col-a">
+                        <label class="frm-contact__label" form="">Nome</label>
+                    </div>
+
+                    <div class="frm-contact__col-b">
+                        <input class="frm-contact__input frm-contact__input--metade" type="tex" id="Nome" name="Nome"
+                            placeholder="Nome">
+                        <input class="frm-contact__input frm-contact__input--metade" type="text" id="Sobrenome"
+                            name="Sobrenome" placeholder="Sobrenome">
+                    </div>
+
+                </div>
+
+                <div class="frm-contact__linha">
+                    <div class="frm-contact__col-a">
+                        <label class="frm-contact__label" form="">Email</label>
+                    </div>
+
+                    <div class="frm-contact__col-b">
+                        <input class="frm-contact__input frm-contact__input--inteiro" type="tex" id="Email" name="Email"
+                            placeholder="Email">
+
+                    </div>
+
+                </div>
+
+                <div class="frm-contact__linha">
+                    <div class="frm-contact__col-a">
+                        <label class="frm-contact__label" form="">Telefone</label>
+                    </div>
+
+                    <div class="frm-contact__col-b">
+                        <input class="frm-contact__input frm-contact__input--terco" type="tex" id="NEstado"
+                            name="Telefone" placeholder="+55">
+                        <input class="frm-contact__input frm-contact__input--terco" type="tex" id="DDD"
+                            name="Telefone" placeholder="DDD">
+                        <input class="frm-contact__input frm-contact__input--terco" type="tex" id="Telefone"
+                            name="Telefone" placeholder="99999-9999">
+                    </div>
+                </div>
+
+                <div class="frm-contact__linha">
+                    <div class="frm-contact__col-a">
+                        <label class="frm-contact__label" for="">Endereço</label>
+                    </div>
+
+                    <div class="frm-contact__col-b">
+                        <input class="frm-contact__input frm-contact__input--quarto" type="text" id="Cep"
+                            name="CEP:02346-726" placeholder="CEP:02346-726" onblur="buscarEndereco(this.value);">
+                        <input class="frm-contact__input frm-contact__input--metade" type="text" id="Rua"
+                            name="Rua lá" placeholder="Rua lá">
+                        <input class="frm-contact__input frm-contact__input--quarto" type="text" id="Compremento"
+                            name="N Casa" placeholder="N Casa">
+                    </div>
+                </div>
+
+                <div class="frm-contact__linha">
+                    <div class="frm-contact__col-a">
+                        <label class="frm-contact__label" form=""></label>
+                    </div>
+
+                    <div class="frm-contact__col-b">
+                        <input class="frm-contact__input frm-contact__input--terco" type="tex" id="Apartamento"
+                            name="Apto. 12 Bloco X" placeholder="Apto. 12 Bloco X">
+                        <input class="frm-contact__input frm-contact__input--terco" type="tex" id="Bairro" name="Bairro"
+                            placeholder="Bairro">
+                        <input class="frm-contact__input frm-contact__input--terco" type="tex" id="Cidade" name="Cidade"
+                            placeholder="Cidade">
+                    </div>
+                </div>
+
+                <div class="frm-contact__linha">
+                    <div class="frm-contact__col-a">
+                        <label class="frm-contact__label" form=""></label>
+                    </div>
+
+                    <div class="frm-contact__col-b">
+                        <input class="frm-contact__input frm-contact__input--terco" type="tex" id="Estado" name="Estado"
+                            placeholder="Estado">
+                    </div>
+                </div>
+
+                <div class="frm-contact__linha frm-contact__linha--cima">
+                    <div class="frm-contact__col-a">
+                        <label class="frm-contact__label" form="">Anotações</label>
+                    </div>
+
+                    <div class="frm-contact__col-b">
+                        <textarea class="frm-contact__input frm-contact__input--inteiro-anotacoes" type="tex"
+                            id="Anotacoes" name="Suas anotações aqui..."
+                            placeholder="Suas anotações aqui..."></textarea>
+                    </div>
+                </div>
+
+                <div class="frm-contact__linha ">
+                    <div class="frm-contact__col-a">
+                        <label class="frm-contact__label" form=""></label>
+                    </div>
+
+                    <div class="frm-contact__col-b frm-contact__col-b-button">
+                        <button onclick="validarFormularios()" type="button" class="btn cadastrar">Cadastrar</button>
+                        <button type="reset" class="btn limpar">Limpar</button>
+                    </div>
+                </div>
+             </form>
+
+        </div>
+           
+     </main>
+        
+    <footer>
+    </footer>
+</body>

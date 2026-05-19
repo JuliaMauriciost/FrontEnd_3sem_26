@@ -1,0 +1,143 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nome": "Julia Mauricio",
+      "idade": 17,
+      "email": "juju@gmail.com"
+    },
+    {
+      "id": "2",
+      "nome": "Maria Eduarda",
+      "idade": 17,
+      "email": "madu@gmail.com"
+    },
+    {
+      "id": "3",
+      "nome": "Eduardo Pereira",
+      "idade": 17,
+      "email": "edu@gmail.com"
+    },
+    {
+      "id": "quVbEFV2xNM",
+      "nome": "Julia Mauricio",
+      "idade": 17,
+      "email": "ju@gmail.com"
+    },
+    {
+      "id": "qt3n16TdWgA",
+      "nome": "Maria Eduarda",
+      "idade": 17,
+      "email": "madu@gmail.com"
+    },
+    {
+      "id": "o6SirAfhC10",
+      "nome": "Eduardo Pereira",
+      "idade": 17,
+      "email": "edu@gmail.com"
+    }
+  ],
+  "Post": [
+    {
+      "id": "cyePOkmU72c",
+      "imagem": "https://image1.mobiauto.com.br/images/api/images/v1.0/346267825/transform/fl_progressive,f_webp,q_100,w_1200",
+      "texto": "xique xique Bahia",
+      "qntCurtidas": 2000000
+    }
+  ],
+  "imc": [
+    {
+      "nome": "Eduardo",
+      "altura": 1.67,
+      "peso": "85",
+      "IMC": 30.477966223242138,
+      "Situacao": "Obesidade Grau I",
+      "id": "ZZ0tOkaI6Fs"
+    },
+    {
+      "nome": "Maria Eduarda",
+      "altura": 1.6,
+      "peso": 60,
+      "IMC": "23.44",
+      "Situacao": "Saudável",
+      "id": "C22D_9ZzhM8"
+    },
+    {
+      "nome": "Julia",
+      "altura": 1.58,
+      "peso": 50,
+      "IMC": "20.03",
+      "Situacao": "Saudável",
+      "id": "LwfHELZ-bg0"
+    },
+    {
+      "nome": "stephani",
+      "altura": 148,
+      "peso": 65,
+      "IMC": "0.00",
+      "Situacao": "Magreza grave",
+      "id": "19E3hI2YrlA"
+    },
+    {
+      "nome": "Matheus",
+      "altura": 167,
+      "peso": 65,
+      "IMC": "0.00",
+      "Situacao": "Magreza grave",
+      "id": "uTCExsIwWTM"
+    },
+    {
+      "nome": "felipe",
+      "altura": 1.65,
+      "peso": 78,
+      "IMC": "28.65",
+      "Situacao": "Sobrepeso",
+      "id": "qo3Rh4ET1NY"
+    }
+  ],
+  "Calculadora": [
+    {
+      "n1": 50,
+      "n2": 50,
+      "op": "soma",
+      "resultado": "100.00",
+      "id": "Te67E_yWycg"
+    },
+    {
+      "n1": 95,
+      "n2": 39,
+      "op": "subtracao",
+      "resultado": "56.00",
+      "id": "fWx1gehGq9c"
+    },
+    {
+      "n1": 144,
+      "n2": 5,
+      "op": "multiplicacao",
+      "resultado": "720.00",
+      "id": "fdbufgwHsmw"
+    },
+    {
+      "n1": 320,
+      "n2": 6,
+      "op": "divisao",
+      "resultado": "53.33",
+      "id": "cOCFFwDip2c"
+    },
+    {
+      "n1": 58,
+      "n2": 90,
+      "op": "soma",
+      "resultado": "148.00",
+      "id": "75gknSOlHQw"
+    },
+    {
+      "n1": 236,
+      "n2": 123,
+      "op": "subtracao",
+      "resultado": "113.00",
+      "id": "BYoPKjG7C_A"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

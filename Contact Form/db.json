@@ -1,0 +1,69 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "contatos": [
+    {
+      "id": "1",
+      "nome": "Júlia",
+      "sobrenome": "Maurício dos Santos"
+    },
+    {
+      "id": "2",
+      "nome": "Maria Eduarda",
+      "sobrenome": "Freitas da Silva"
+    },
+    {
+      "nome": "Eduardo",
+      "sobrenome": "Costa",
+      "id": "XavV1dQYnYE"
+    },
+    {
+      "nome": "Eduardo",
+      "sobrenome": "Pereira Lindão",
+      "id": "yP_mJ3RhpcM"
+    },
+    {
+      "nome": "Eduardo",
+      "sobrenome": "Mauriciu",
+      "email": "julia.m.santos23@aluno.senai.br",
+      "nEstado": "55",
+      "ddd": "11",
+      "telefone": "1234567899",
+      "cep": "04236050",
+      "rua": "Rua Flores de São Pedro",
+      "compremento": "125",
+      "apartamento": "",
+      "bairro": "Vila Heliópolis",
+      "cidade": "São Paulo",
+      "estado": "São Paulo",
+      "anotacoes": "sfetyeytujkymhngesa,liku",
+      "id": "yyQqnCB-YCw"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
