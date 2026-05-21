@@ -1,96 +1,145 @@
 import { useEffect, useState } from "react"
 import "./produtospage.css"
 import fotoProduto from "/images/hero.png"
+import axios from "axios"
+import api from "../../services/services"
 
 export const ProdutosPage = () => {
     const [listaProdutos, setListaProdutos] = useState([])
 
     // states - campos do formulário
+    const [id, setId] = useState(0)
     const [titulo, setTitulo] = useState("")
     const [descricao, setDescricao] = useState("")
     const [preco, setPreco] = useState(0)
     const [imagem, setImagem] = useState("herocopy.png")
+    const [editar, setEditar] = useState(false)
+
 
     useEffect(() => {
-        const getDados = async () => { 
-        try {
-            const retornoAPI = await fetch("http://localhost:3000/produtos");
-            const dados = await retornoAPI.json()
-            setListaProdutos(dados);
-            
-        } catch (error) {
-            console.log(error);
-        }
+        const getDados = async () => {
+            try {
+                const retornoAPI = await api.get("/produtos")
+                const dados = await retornoAPI.data
+                setListaProdutos(dados);
+
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         getDados()
 
     }, [])
-    
 
-    const cadastrar = async (e) => {
+
+    const cadastrarProduto = async (e) => {
         e.preventDefault()
         // validar os dados
-        if ( 
-            titulo.trim().length == 0 || 
-             descricao.trim().length == 0 || isNaN(preco)
+        if (titulo.trim().length == 0 || descricao.trim().length == 0 || isNaN(preco)
         ) {
             alert("Preencha todos os campos corretamente");
             return false;
         }
         const objProduto = {
             titulo: titulo,
-            preco: preco,
             descricao: descricao,
+            preco: preco,
             imagem: imagem
         }
         console.log(objProduto);
-
-        const retornoAPI = fetch ("http://localhost:3000/produtos", {
-            method: "POST",
-            body: JSON.stringify(objProduto),
-            headers: {
-                "Content-Type" : "application/json; charset=UTF-8" 
-            }
-        })
-
-
-        const produtoCadastrado = await retornoAPI.json()
-        console.log(produtoCadastrado);
+        const retornoAPI = await api.post("/produtos",objProduto)
+        const produtoCadastrado = await retornoAPI.data()
+        // console.log(produtoCadastrado);
         setListaProdutos([...listaProdutos, produtoCadastrado])
-        
-}
-        const deletar = async (id) => {
-            try {
-                await fetch(`http://localhost:3000/produtos/${id}`, {
-                    method: "DELETE"
-                })
-                const novaLista = listaProdutos.filter(p => p.id !== id)
-                setListaProdutos(novaLista)
-            } catch (error) {
-                console.log(error)
-            }
 
+        limparFormulario()
+    }
+
+    function limparFormulario() {
+        setId(0)
+        setTitulo("")
+        setDescricao("")
+        setPreco(0)
+    }
+    const deletar = async (id) => {
+        if(!confirm("Você realmente quer apagar o produto?"))
+            return false
+
+        try {
+            const retornoAPI = await api.delete(`/produtos/${id}`)
+            // gera a lista de produtos que não foram apagados
+            const novaLista = listaProdutos.filter((prod) => {
+                return prod.id != id;
+            })
+
+            //se apagou avisa o usuario
+            if (retornoAPI.status == 200 && retornoAPI.statusText == "OK") {
+                alert("Produto apagado com sucesso!");
+                setListaProdutos(novaLista);
+            } else {
+                alert("Erro ao cadastrar o produto");
+            }
+        } catch (error) {
+            console.log(error)
         }
+
+    }
+
+    const editarProduto = async (e) => {
+        // debugger
+        e.preventDefault()
+        // validar formulário
+        // criar o objeto Cadastro
+        // chamar o fetch com verbo PUT
+        // chamar a função getDados()
+        const objProduto = {
+            titulo: titulo,
+            descricao: descricao,
+            preco: preco,
+            imagem: imagem
+        }
+        try {
+            const retornoAPI = await api.put(`/produtos/${id}`, objProduto)
+            console.log(retornoAPI);
+            const produtoEditado = await retornoAPI.data
+            const novaLista = listaProdutos.map(p => p.id === id ? produtoEditado : p)
+            setListaProdutos(novaLista)
+            // if(retornoAPI.status == 200) {
+            //     getDados()
+            //     limparFormulario()
+            //     setEditar(false)
+            // }else {
+            //     alert("Erro ao recarregar os dados")
+            // }
     
 
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className="page">
-            <form action="" onSubmit={cadastrar} className="produto" >
-                <h1 className="form__title">Cadatro de produtos</h1 >
-                <input className="input-form" type="text" id="nome" onChange={(e) => {
+            <form action="" onSubmit={editar ? editarProduto : cadastrarProduto} className="produto" >
+                <h1 className="form__title">Cadastro De Produtos</h1 >
+                <input className="input-form" type="text" id="nome" value={titulo} onChange={(e) => {
                     setTitulo(e.target.value)
                 }} placeholder="Nome do produto" />
-                <input className="input-form" type="number" id="preco" onChange={(e) => {
+                <input className="input-form" type="number" id="preco" value={preco} onChange={(e) => {
                     setPreco(parseFloat(e.target.value))
                 }} placeholder="Preço" />
-                <input className="input-form" type="text" id="descricao" onChange={(e) => {
+                <input className="input-form" type="text" id="descricao" value={descricao} onChange={(e) => {
                     setDescricao(e.target.value)
                 }} placeholder="Descrição" />
 
+                {editar && (<button
+                    className="cadastro__button" onClick={() => {
+                        setEditar(false)
+                        limparFormulario()
+                    }}>Cancelar</button>)}
 
-                <button className="cadastro__button" >Cadastrar</button>
+                <button className="cadastro__button" >Salvar</button>
 
             </form>
 
@@ -98,15 +147,25 @@ export const ProdutosPage = () => {
                 {
                     listaProdutos.map((p) => {
                         return (
-                            <article className="data__card">
-                                 <strong className="deletar" onClick={(e) => {
-                                    e.preventDefault();
-                                    deletar(p.id);
-                                }} > Apagar </strong>
+                            <article key={p.id} className="data__card">
                                 <span><h4>Nome do produto: {p.titulo}</h4> </span>
                                 <span><h4>Preço: </h4>{p.preco} </span>
                                 <span><h4>Descrição: </h4>{p.descricao} </span>
                                 <span><h4>imagem: </h4><img className="img" src={fotoProduto} /> </span>
+                                <a href="" onClick={(e) => {
+                                    e.preventDefault()
+                                    deletar(p.id)
+                                }}>Apagar</a>
+
+                                <a href="" onClick={(e) => {
+                                    e.preventDefault();
+
+                                    setEditar(true)
+                                    setId(p.id)
+                                    setTitulo(p.titulo)
+                                    setDescricao(p.descricao)
+                                    setPreco(p.preco)
+                                }}>Editar</a>
                             </article>
                         )
                     })

@@ -6,6 +6,27 @@
       "preco": 1.32,
       "descricao": "just do it",
       "imagem": "./images/hero.png"
+    },
+    {
+      "titulo": "Albúm de Figuirinha Copa26",
+      "descricao": "copa do mundo!",
+      "preco": 32,
+      "imagem": "herocopy.png",
+      "id": "0gLavSw5Bvo"
+    },
+    {
+      "titulo": "PlayStation 4",
+      "descricao": "inumeros jogos",
+      "preco": 2000,
+      "imagem": "herocopy.png",
+      "id": "Yaz81WQr8uE"
+    },
+    {
+      "titulo": "Eduardo",
+      "descricao": "dudu",
+      "preco": 90,
+      "imagem": "herocopy.png",
+      "id": "XfSXfnjGDbM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
