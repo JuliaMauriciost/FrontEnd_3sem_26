@@ -11,12 +11,13 @@ const CadastroFilme = () => {
     const [listaGeneros, setListaGeneros] = useState([
     ])
 
-    const [valorSelect, setValorSelect] = useState("")
-    const [listaFilmes, setListaFilmes] = useState([])
-    const [valor, setValor] = useState("")
-    const [idEditar, setIdEditar] = useState(0)
-
-    const [ editar, setEditar] = useState(false)
+    const [valor, setValor] = useState("");
+    const [img, setImg] = useState("")
+    const [valorImagem, setValorImagem] = useState(null);
+    const [listaFilmes, setListaFilmes] = useState([]);
+    const [valorSelect, setValorSelect] = useState("");
+    const [editar, setEditar] = useState(false);
+    const [idEditar, setIdEditar] = useState(null);
 
     // ciclo de vida e funções
 
@@ -112,40 +113,58 @@ const CadastroFilme = () => {
 
 
    const editarFilme = async (e) => {
-        setEditar(false);
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("Nome", valor);
-        formData.append("IdGenero", valorSelect);
+
         try {
-            const retornoAPI = await api.put(`/Filme/${idEditar}`, formData);
+
+            const formData = new FormData();
+
+            formData.append("Nome", valor);
+            formData.append("IdGenero", valorSelect);
+            formData.append("Imagem", img)
+            await api.put(`/Filme/${idEditar}`, formData);
+
             limparFormulario();
             getFilmes();
+
+            Alerta({
+                title: "Sucesso!",
+                text: "Filme atualizado com sucesso!",
+                icon: "success",
+                confirmButtonText: "Ok",
+            });
+
         } catch (error) {
+
             console.log("STATUS:", error.response?.status);
             console.log("DATA:", error.response?.data);
             console.log("ERRO COMPLETO:", error);
+
             Alerta({
                 title: "Erro na chamada da API",
                 text: "Verifique os dados e tente novamente!",
-                icon: "warning",
-                confirmButtonText: 'Ok',
+                icon: "error",
+                confirmButtonText: "Ok",
             });
         }
-    }
+    };
+
 
     const limparFormulario = () => {
         setValor("");
+        setValorSelect("");
+        setValorImagem(null);
         setEditar(false);
         setIdEditar(null);
     }
 
     const preEditar = (item) => {
-        setIdEditar(item.idGenero)
-        setValor(item.nome)
-        setEditar(true)
-        console.log(item);
+        setValor(item.titulo);
+        setValorSelect(item.idGenero);
+        setIdEditar(item.idFilme);
+        setEditar(true);
     }
+
 
     useEffect(()=>{
         getFilmes()
@@ -201,6 +220,8 @@ const CadastroFilme = () => {
             setValor={setValor}
             funcCadastro={editar ? editarFilme : cadastrarFilme}
             btnEditar={editar}
+            img={img}
+            setImg={setImg}
             listaGeneros= {listaGeneros}
             valorSelect= {valorSelect}
             setValorSelect= {setValorSelect}

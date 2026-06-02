@@ -3,6 +3,7 @@ import "./Lista.css";
 // Importação de imagens:
 import Editar from "../../assets/img/pen-to-square-solid.svg";
 import Excluir from "../../assets/img/trash-can-regular.svg";
+import { apiPort } from "../../Services/services";
 
 const Lista = (props) => {
     return (
@@ -17,6 +18,9 @@ const Lista = (props) => {
                         <thead>
                             {/* tr => table row */}
                             <tr className="table_cabecalho">
+
+                                {props.tipoLista === "filme" && (<th>Imagem</th>)}
+
                                 {/* th => table head */}
                                 <th>Nome</th>
                                 <th style={{ display: props.visibilidade }}>Gênero</th>
@@ -33,6 +37,15 @@ const Lista = (props) => {
                                     <tr className="item_lista" key={item.idGenero}>
                                         {/* {console.log(index)} */}
                                         {/* {console.log(item.idGenero)} */}
+
+                                        <td data-cell="Imagem" style={{ display: props.visibilidade }}>
+                                            <img
+                                                src={`https://localhost:${apiPort}/imagens/${item.imagem}`} // Ajuste a URL conforme necessário
+                                                alt="fundo"
+                                                style={{ display: props.visibilidade }}
+                                            />
+                                        </td>
+
                                         <td data-cell="Nome">
                                             {/* Primeira célula da linha: mostra o nome (se for gênero) ou título (se for filme) */}
                                             {/* titulo == filme */}
@@ -54,16 +67,16 @@ const Lista = (props) => {
                                             </button>
                                         </td>
                                     </tr>
-                                )) 
+                                ))
                             ) : (
-                                    // Caso a lista esteja vazia ou não exista, mostra uma linha dizendo que não há registros
-                                    <tr>
-                                        <td>Nenhum registro encontrado.</td>
-                                    </tr>
-                                )
+                                // Caso a lista esteja vazia ou não exista, mostra uma linha dizendo que não há registros
+                                <tr>
+                                    <td>Nenhum registro encontrado.</td>
+                                </tr>
+                            )
                             }
-                                
-                        
+
+
                         </tbody>
                     </table>
                 </div>
