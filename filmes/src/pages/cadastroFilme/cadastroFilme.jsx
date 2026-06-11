@@ -22,57 +22,29 @@ const CadastroFilme = () => {
     // ciclo de vida e funções
 
     const cadastrarFilme = async (e) => {
-        e.preventDefault();
-        if(valor.trim().length == 0) 
-        {
+    e.preventDefault();
 
-            Alerta({
-                title: "Cadastro de Filme",
-                text : "Filme deve ser preenchido antes de cadastrar!",
-                icon: "warning",
-                confirmButtonText: "Ok"
-            })
+    const formData = new FormData();
 
-            return false;
+    formData.append("Nome", valor);
+    formData.append("IdGenero", valorSelect);
+    formData.append("Imagem", img); // <- faltava isso
+
+    try {
+        const retornoAPI = await api.post("/Filme", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        if (retornoAPI.status === 201) {
+            limparFormulario();
+            getFilmes();
         }
-
-        const formData = new FormData();
-        formData.append("Nome", valor);
-        formData.append("IdGenero", valorSelect);
-
-
-        try {
-            // Cadastra na api, no endpoint do swagger
-            const retornarAPI = await api.post("/Filme", formData)
-            getFilmes()
-            if(retornarAPI.status == 201){
-                 Alerta({
-                title: "Cadastro de Filme",
-                text : "Filme Cadastrado com Sucesso",
-                icon: "success",
-                confirmButtonText: "Ok"
-            })
-                limparFormulario()
-                getFilmes()
-            } else {
-                alert("Houve algum problema ao cadastrar!")
-            }
-        } catch (error) {
-             Alerta({
-                title: "Cadastro de Filme",
-                text : "Erro na chamada da API",
-                icon: "error"
-            })
-            
-            console.log("STATUS:", error.response?.status);
-            console.log("DATA:", error.response?.data);
-            console.log("ERRO COMPLETO:", error);
-            console.log(JSON.stringify(error.response.data.errors, null, 2));
-            // alert("Ocorreu um erro ao cadastrar o gênero!")
-            // console.log(retornoAlerta);
-        }
-        return false;
+    } catch (error) {
+        console.log(error.response?.data);
     }
+};
 
     const excluirFilme = async (item) => {
          const result = await Alerta({
@@ -121,7 +93,7 @@ const CadastroFilme = () => {
 
             formData.append("Nome", valor);
             formData.append("IdGenero", valorSelect);
-            formData.append("Imagem", img)
+            formData.append("imagem", img)
             await api.put(`/Filme/${idEditar}`, formData);
 
             limparFormulario();

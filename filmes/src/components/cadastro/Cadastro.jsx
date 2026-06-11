@@ -38,6 +38,24 @@ const Cadastro = (props) => {
                         </select>
                     </div>
 
+                    <div
+                        className="campo_cad_imagem"
+                        style={{ display: props.visibilidade }}
+                    >
+                        <label htmlFor="imagem">Imagem</label>
+
+                        <input
+                            type="file"
+                            name="imagem"
+                            id="imagem"
+                            accept="image/*"
+                            onChange={(e) =>
+                                props.setImg(e.target.files[0])
+                            }
+                        />
+                    </div>
+
+
                     {
                         props.btnEditar && <Botao nomeDoBotao="Cancelar" cancelarEdicao={props.cancelarEdicao} btnEditar={props.btnEditar}/>
                     }
